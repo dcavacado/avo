@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Avocado & Stem Detector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+    <style>
+        body { margin: 0; font-family: sans-serif; text-align: center; background: #000; color: white; }
+        video, canvas { width: 100%; max-width: 600px; }
+    </style>
+</head>
+<body>
+    <h2>Avocado & Stem Detection</h2>
+    <video id="video" autoplay muted playsinline></video>
+    <canvas id="canvas"></canvas>
+    <script src="main.js"></script>
+</body>
+</html>
