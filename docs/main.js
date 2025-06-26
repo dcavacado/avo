@@ -98,6 +98,8 @@ async function detectLoop(video, canvas) {
         const inputTensor = preprocess(video, canvas);
         const output = await session.run({ images: inputTensor });
         const outputTensor = Object.values(output)[0];
+        console.log("Output shape:", outputTensor.dims);
+        console.log("Output data sample:", outputTensor.data.slice(0, 10));
         const boxes = processOutput(outputTensor);
 
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
