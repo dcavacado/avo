@@ -44,7 +44,7 @@ function drawBoxes(ctx, boxes, scaleX, scaleY) {
 
 function processOutput(output, confThreshold = 0.4) {
     const boxes = [];
-    const preds = output.data;
+    const preds = outputData;
     const numDetections = preds.length / 84;
 
     for (let i = 0; i < numDetections; i++) {
@@ -97,7 +97,9 @@ async function detectLoop(video, canvas) {
     while (true) {
         const inputTensor = preprocess(video, canvas);
         const output = await session.run({ images: inputTensor });
-        const outputTensor = Object.values(output)[0];
+        const outputTensor = output["output0"] || Object.values(output)[0];
+        const outputData = outputTensor.data;
+        const numDetections = outputTensor.dims[1]; // e.g., 84 columns, N rows
         console.log("Output shape:", outputTensor.dims);
         console.log("Output data sample:", outputTensor.data.slice(0, 10));
         const boxes = processOutput(outputTensor);
